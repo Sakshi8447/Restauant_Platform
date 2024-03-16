@@ -1,16 +1,17 @@
 // 1) 
 import mongoose from "mongoose"
+import bcrypt from "bcrypt"
 
-
-const variety = new mongoose.Schema({
-    name: {
-        type: String,
-        enum: ['VEG', 'NON_VEG']
-    }
-})
-
-// 2)
 const restaurantSchema = new mongoose.Schema({
+    tag: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true
@@ -40,10 +41,12 @@ const restaurantSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    serves: {
-        type: [variety],
-        required: true
-    },
+    serves: [
+        {
+            type: String,
+            enums: ["VEG", "NON_VEG"]
+        }
+    ],
     coupons: {
         type: String, // UC50
     },
@@ -55,12 +58,28 @@ const restaurantSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    dishes: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: "dishes"
-    }
 }, { timestamps: true })
 
-// 3)
+
+// middleware to hash (encrypt) the password
+restaurantSchema.pre("save", async function (next) {
+    // if password field is not modified then return next();
+    if (!this.isModified("password")) return next();
+
+    this.password = await bcrypt.hash(this.password, 10);
+    next();
+    // if(isModified(password) ) {
+    //     this.password = await bcrypt.hash(this.password, 10);
+    //     next();
+    // }else {
+    //     next();
+    // }
+})
+
+// to compare the password given by the user with the stored password.
+// async await 
+restaurantSchema.methods.isPasswordCorrect = async function (password) {
+    return await bcrypt.compare(password, this.password);
+}
 
 export const restaurant = mongoose.model("restaurant", restaurantSchema);

@@ -1,9 +1,17 @@
 import mongoose from "mongoose"
 
 const dishesSchema = new mongoose.Schema({
+    restaurant_tag: {
+        type: String,
+        required: true
+    },
+    rest_password: {
+        type: String,
+        required: true
+    },
     dish_type: {
         type: String,
-        enum: ['VEG', "NON_VEG"]
+        enum: ["VEG", "NON_VEG"]
     },
     title: {
         type: String,
@@ -25,7 +33,7 @@ const dishesSchema = new mongoose.Schema({
     thumbnail: {
         type: String,
         required: true
-    }
+    },
 
 
 }, { timestamps: true });
