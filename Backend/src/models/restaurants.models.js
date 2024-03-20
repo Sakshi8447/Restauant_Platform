@@ -74,7 +74,7 @@ restaurantSchema.pre("save", async function (next) {
     // }else {
     //     next();
     // }
-})
+});
 
 // to compare the password given by the user with the stored password.
 // async await 
@@ -83,3 +83,5 @@ restaurantSchema.methods.isPasswordCorrect = async function (password) {
 }
 
 export const restaurant = mongoose.model("restaurant", restaurantSchema);
+
+// export {restaurant, isPasswordCorrect}
