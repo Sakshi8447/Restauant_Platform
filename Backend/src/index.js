@@ -1,6 +1,6 @@
 import { connectDB } from "./db/index.js";
 import { app } from "./app.js";
-import { upload } from "./middleware/multer.middleware.js"
+import { upload } from "./middleware/multer.middleware.js";
 import { uploadFileOnCloudinary } from "./utils/cloudinary.js";
 import { restaurant } from "./models/restaurants.models.js";
 import { dishes } from "./models/dishes.models.js";

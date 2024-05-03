@@ -4,6 +4,9 @@ import { Label, TextInput, Select, Button, FileInput } from "flowbite-react"
 import { useState } from "react"
 
 export default function AddRestaurant() {
+  
+  const [error, setError] = useState("");
+
   const [tag, setTag] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
@@ -54,11 +57,16 @@ export default function AddRestaurant() {
       },
     };
 
-    await axios.post("http://localhost:5000/api/newRestaurant", formData, config).then((response) => {
-      console.log(response);
-    }).catch((error) => {
-      console.log(error);
+    await axios.post("http://localhost:5000/api/newRestaurant", formData, config).then((res) => {
+      console.log(res.data)
+      setError(res.data.message);
     })
+    .catch((error) => {
+      console.log(error);
+      setError(error.message); // Corrected typo: 'mesaage' to 'message'
+    })
+    
+    
   }
 
 
