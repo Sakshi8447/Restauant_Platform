@@ -63,7 +63,7 @@ export default function AddRestaurant() {
     })
     .catch((error) => {
       console.log(error);
-      setError(error.message); // Corrected typo: 'mesaage' to 'message'
+      setError(error.message); 
     })
     
     
