@@ -57,6 +57,7 @@ export default function AddRestaurant() {
       },
     };
 
+    // api call
     await axios.post("http://localhost:5000/api/newRestaurant", formData, config).then((res) => {
       console.log(res.data)
       setError(res.data.message);
@@ -98,23 +99,27 @@ export default function AddRestaurant() {
           <TextInput id="Password" type="password" placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} required />
         </div>
         <div>
+          
           <div className="mb-2 block">
             <Label htmlFor="Title" value="Title" />
           </div>
           <TextInput id="Title" type="text" placeholder="Restaurant Name" onChange={(e) => setTitle(e.target.value)} required />
         </div>
+
         <div>
           <div className="mb-2 block">
             <Label htmlFor="Description" value="Description" />
           </div>
           <TextInput id="Description" type="text" placeholder="Description" onChange={(e) => setDescription(e.target.value)} />
         </div>
+
         <div>
           <div className="mb-2 block">
             <Label htmlFor="Country" value="Country" />
           </div>
           <TextInput id="Country" type="text" placeholder="India" disabled />
         </div>
+
         <div>
           <div className="mb-2 block">
             <Label htmlFor="states" value="Select your state" />
@@ -158,6 +163,7 @@ export default function AddRestaurant() {
           </div>
           <TextInput id="city" type="text" placeholder="Enter your city" onChange={(e) => setCity(e.target.value)} required />
         </div>
+        
         <div>
           <div className="mb-2 block">
             <Label htmlFor="serves" value="Select Type" />
