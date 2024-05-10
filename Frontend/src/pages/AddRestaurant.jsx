@@ -168,12 +168,14 @@ export default function AddRestaurant() {
           <div className="mb-2 block">
             <Label htmlFor="serves" value="Select Type" />
           </div>
+
           <Select id="serves" onChange={(e) => setServes(e.target.value)} required>
             <option>VEG</option>
             <option>NON_VEG</option>
             <option>BOTH</option>
           </Select>
         </div>
+        
         <div>
           <div className="mb-2 block">
             <Label htmlFor="coupons" value="Enter Coupons" />
